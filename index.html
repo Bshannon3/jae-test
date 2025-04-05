@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our 6 Month Journey</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0b1e36;
+      color: #ffc0cb;
+    }
+
+    .page {
+      display: none;
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1 {
+      color: #ffc0cb;
+      font-size: 2.3em;
+      margin-bottom: 10px;
+      animation: slideUp 1s ease;
+    }
+
+    .message {
+      margin: 20px 0;
+      font-size: 1.1em;
+      animation: fadeIn 1.2s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      animation: zoomIn 1s ease;
+    }
+
+    .nav-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .nav-buttons button,
+    .start-btn {
+      padding: 10px 20px;
+      background: #ff6b91;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav-buttons button:hover,
+    .start-btn:hover {
+      background: #e05682;
+      transform: scale(1.05);
+    }
+
+    .start-btn {
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hearts span {
+      position: absolute;
+      display: block;
+      color: #ffc0cb;
+      font-size: 16px;
+      opacity: 0.2;
+      animation: floatUp 10s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="heartContainer"></div>
+
+  <!-- Title Page -->
+  <div class="page active" id="titlePage">
+    <h1>Jae,</h1>
+    <p class="message">Let’s go on a little journey through our favorite memories so far...</p>
+    <button class="start-btn" onclick="startJourney()">Start</button>
+  </div>
+
+  <!-- Dynamic Pages -->
+  <div id="pages"></div>
+
+  <script>
+    const steps = [
+      { date: "September 10th, 2024", message: "This is when we met for the first time. Ill never forget the feeling of not being able to control my smile when I first saw you. Ill never forget what you were wearing. Ill never forget hearing the sound of your voice for the first time, ill never forget hearing the sound of your laugh for the first time. From the moment I first met you I knew that you were the person I wanted to have in my life. Meeting you changed my life in so many ways and I am so so grateful for that", img: "JAE1.jpeg" },
+      { 
+        date: "September 10, 2024", 
+        message: "This is where everything changed, this link will take you to where we first met. I got lost trying to find it and somehow ended up taking the wrong highway. I'll never forget the nerves I had when pulling up next to you. You are so incredibly beautiful", 
+        img: "JAE2.jpeg",
+        link: "https://earth.google.com/web/search/49.13167,-122.31833"
+      },
+      { date: "September 28, 2024", message: "This is when", img: "JAE3.jpeg" },
+      { date: "October 6, 2024", message: "This is the day we shared our first kiss. I absolutely love this memory and it never fails to bring a smile to my face. Ill never forget how I didn't know my eyes were supposed to be closed. I'll never forget how our first kiss almost made me end up in the creek. You really did take me off my feet. I promised you it would be unforgettable and I think I kept that promise.  Still to this day I get butterflies every time we kiss, every time we hug, and I am so lucky to have that in my life", img: "JAE4.jpeg" },
+      { date: "October 8, 2024", message: "This was a really good day. 6 months ago I asked you to be my girlfriend, I got down on one knee and presented you with that gigantic ring, man did that break the bank. And you said yes, and that made me so incredibly happy and im so so grateful that you did. You mean everything to me and each passing day I fall more and more in love with you. I am so proud to call you my girlfriend and you are everything I've ever wanted and so much more. I thank God for you everyday", img: "JAE5.jpeg" },
+      { date: "October 31, 2024", message: "This is by far my most favorite halloween ever. I love this memory and I constantly find myself thinking about it. I'll never forget taking my pants off in a parking lot, giving them to you, and then wearing a winter coat as a skirt. I totally killed that look by the way. I'll never forget seeing your eyes light up when you realized that you could go trick or treating, ill never forget how excited you got. I loved seeing your inner kid come out and I am so so thankful that it worked out in the way that it did", img: "JAE6.jpeg" },
+      { date: "November 18, 2024", message: "This day was the first time we said 'I Love You' to each other. My heart skipped a beat when you first said it, I was waiting to say it for so long. I fell for you quick, really quick, and hearing you say I love you lit up my whole world. Now we haven't gone a day without saying it and that means the world to me. I love you so incredibly much and o really do find myself falling for you more and more every day", img: "JAE7.jpeg" },
+      { date: "December 23, 2024", message: "This was our first 'Christmas' together. You were the first person I've ever made a homemade gift for and I honestly loved doing it. I loved giving you something that to me represented how beautiful you are, how much I love you. You were also the first person outside my family yo get me a gift and I am so so lucky for that. That painting you gave me means everything to me and I am so proud to be hanging that on my wall, I love looking at it", img: "JAE8.jpeg" },
+      { date: "January 26, 2025", message: "First photos together", img: "JAE9.jpeg" },
+      { date: "February 1, 2025", message: "You were there for me when I bought my car", img: "JAE10.jpeg" },
+      { date: "March 4, 2025", message: "our first roadtrip together", img: "JAE11.jpeg" },
+      { date: "You Mean Everything To Me", message: "message", img: "JAE12.jpeg" },
+      { date: "I Cherish Every Single Second Spent With You", message: "message", img: "JAE13.jpeg" },
+      { date: "I Am So Proud Of You", message: "message", img: "JAE14.jpeg" },
+      { date: "I Love You More Than Forever Could Ever Measure", message: "message", img: "JAE15.jpeg" },
+      { date: "Forever & Always", message: "This is only the beginning, Jae. Thank you for the most beautiful 6 months of my life. I love you endlessly.", img: "https://via.placeholder.com/500x300?text=Forever+Us" }
+    ];
+
+    const pagesContainer = document.getElementById('pages');
+    const titlePage = document.getElementById('titlePage');
+    let current = 0;
+
+    function startJourney() {
+      titlePage.classList.remove('active');
+      renderPage(current);
+    }
+
+    function renderPage(index) {
+      const step = steps[index];
+      let pageContent = `
+        <div class="page active">
+          <h1>${step.date}</h1>
+          <div class="message">${step.message}</div>
+          <img src="${step.img}" alt="Photo ${index + 1}" />
+      `;
+      
+      if (step.link) {
+        pageContent += `<p><a href="${step.link}" target="_blank" style="color:#ffc0cb; font-size: 1.1em;">Click here to see where it all started!</a></p>`;
+      }
+
+      pageContent += `
+        <div class="nav-buttons">
+          <button onclick="prevStep()" ${index === 0 ? 'disabled' : ''}>&larr; Back</button>
+          ${index < steps.length - 1 ? `<button onclick="nextStep()">Next &rarr;</button>` : ''}
+        </div>
+      </div>
+      `;
+
+      pagesContainer.innerHTML = pageContent;
+    }
+
+    function nextStep() {
+      if (current < steps.length - 1) {
+        current++;
+        renderPage(current);
+      }
+    }
+
+    function prevStep() {
+      if (current > 0) {
+        current--;
+        renderPage(current);
+      }
+    }
+
+    // Subtle hearts floating
+    const heartContainer = document.getElementById("heartContainer");
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.innerHTML = "♥";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 4 + 6) + "s";
+      heart.style.fontSize = (Math.random() * 10 + 12) + "px";
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+
+    setInterval(() => {
+      if (document.hasFocus() && Math.random() < 0.3) {
+        createHeart();
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
